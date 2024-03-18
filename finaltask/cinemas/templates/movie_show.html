@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Cinema World | Article</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<script src="{% static 'js/jquery-1.4.2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/cufon-yui.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/cufon-replace.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/Gill_Sans_400.font.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+<!--[if lt IE 7]>
+<script type="text/javascript" src="{% static 'js/ie_png.js' %}"></script>
+<script type="text/javascript">ie_png.fix('.png, .link1 span, .link1');</script>
+<link href="{% static 'css/ie6.css' %}" rel="stylesheet" type="text/css" />
+<![endif]-->
+    <style>
+  .btn-group {
+    margin-right: 10px;
+  }
+</style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-QqWjRW2XNG5zQeklb1IS/TdI4LXaAFOYJMYWLKhjeO2/0M5B2V4NQqu8le3Q1Zr2FfRxRMYehD1Hb+m0cUfuFQ==" crossorigin="anonymous" />
+<body id="page4">
+<!-- START PAGE SOURCE -->
+<div class="tail-top">
+  <div class="tail-bottom">
+    <div id="main">
+      <div id="header">
+        <div class="row-1">
+          <div class="fleft"><a href="#">Cinema <span>World</span></a></div>
+          <ul>
+            {% if user.is_authenticated %}
+            <li>{{ user.username }}</li>
+            <li style="color:white;"><a href="{% url 'registerapp:logout' %}">Logout</a></li>
+             {% else %}
+            <li><a href="{% url 'registerapp:sign_in' %}">Signin</a></li>
+            <li><a href="{% url 'registerapp:login' %}">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="row-2">
+          <ul>
+            <li><a href="{% url 'cinemasapp:index.html' %}">Home</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="content">
+        <div class="line-hor"></div>
+        <div class="box">
+          <div class="border-right">
+            <div class="border-left">
+              <div class="inner">
+
+
+               {% for movie in movies %}
+            <div class="col-12 col-sm-12 col-md-4 xol-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="{{movie.get_url}}"> <img src="{{ movie.img.url }}"></a>
+                        <div class="card-body">
+                             <h4 class="card-title">{{movie.name}}</h4>
+
+                         </div>
+
+                    </div>
+                    <br><br>
+            </div>
+                    {% empty %}
+                        <div class="row mx-auto">
+                            <p class="text-center my_search_text">Zero Results Found</p>
+                            <br>
+                            <br>
+                             {% endfor %}
+                        </div>
+        </div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="left">
+          <div class="right">
+            <div class="footerlink">
+              <p class="lf">Copyright &copy; 2010 <a href="#">SiteName</a> - All Rights Reserved</p>
+              <p class="rf">Design by <a href="http://www.templatemonster.com/">TemplateMonster</a></p>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+<!-- END PAGE SOURCE -->
+</body>
+</html>

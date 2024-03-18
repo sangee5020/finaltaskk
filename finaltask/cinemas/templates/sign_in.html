@@ -1,0 +1,94 @@
+
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Cinema World | Sitemap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<script src="{% static 'js/jquery-1.4.2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/cufon-yui.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/cufon-replace.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/Gill_Sans_400.font.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/script.js' %} type="text/javascript"></script>
+<!--[if lt IE 7]>
+<script type="text/javascript" src="{% static 'js/ie_png.js' %}"></script>
+<script type="text/javascript">ie_png.fix('.png, .link1 span, .link1');</script>
+<link href="{% static 'css/ie6.css' %}" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body id="page6">
+<!-- START PAGE SOURCE -->
+<div class="tail-top">
+  <div class="tail-bottom">
+    <div id="main">
+      <div id="header">
+        <div class="row-1">
+          <div class="fleft"><a href="#">Cinema <span>World</span></a></div>
+
+        </div>
+        <div class="row-2">
+          <ul>
+            <li><a href="{% url 'cinemasapp:index.html' %}">Home</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div id="content">
+        <div class="line-hor"></div>
+        <div class="box">
+          <div class="border-right">
+            <div class="border-left">
+              <div class="inner">
+
+<body style="margin: 0;padding: 0;height: 100vh;background-image: url('{% static 'images/regback.jpg' %}'); background-size: cover;
+             background-position: center center;align-items: center;
+            justify-content: center;">
+<p style="text-align: center;">
+
+<h3>New <span>User</span></h3>
+<form action=" " method="post" style="text-align:left">
+    {% csrf_token %}
+    <label style="color:gray">Enter UserId</label>
+    <input type="text" name="username" placeholder="enter your username" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 30%;"><br>
+    <label style="color:gray">FIRST_NAME</label>
+    <input type="text" name="firstname" placeholder="name" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 30%;"><br>
+    <label style="color:gray">LAST_NAME</label>
+    <input type="text" name="lastname" placeholder="lastname" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 30%;"><br>
+    <label style="color:gray">Password</label>
+    <input type="password" name="passwrd" placeholder="password" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 30%;"><br>
+    <label style="color:red;font-size:10;"> *Password must be same</label><br>
+    <label style="color:gray">Confirm Password</label>
+    <input type="password" name="cnfpasswrd" placeholder="repeat-password" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 30%;"><br>
+    <label style="color:gray">Mail-id</label>
+    <input type="email" name="email" placeholder="email id" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 30%;"><br><br>
+    <input type="submit" style="color:green;">
+
+</form>
+        {% for i in messages %}
+        {{i}}
+        {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="left">
+          <div class="right">
+            <div class="footerlink">
+              <p class="lf">Copyright &copy; 2010 <a href="#">SiteName</a> - All Rights Reserved</p>
+              <p class="rf">Design by <a href="http://www.templatemonster.com/">TemplateMonster</a></p>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+<!-- END PAGE SOURCE -->
+</body>
+</html>

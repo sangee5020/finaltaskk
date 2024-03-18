@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Cinema World </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="{% static 'https://code.jquery.com/jquery-3.2.1.slim.min.js' %}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' %}" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' %}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<script src="{% static 'js/jquery-1.4.2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/cufon-yui.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/cufon-replace.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/Gill_Sans_400.font.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+<!--[if lt IE 7]>
+<script type="text/javascript" src="{% static 'js/ie_png.js' %}"></script>
+<script type="text/javascript">ie_png.fix('.png, .link1 span, .link1');</script>
+<link href="{% static 'css/ie6.css' %}" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+
+<!--  dummy navbar    -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'cinemasapp:index.html' %}">Cinemaworld</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'movieapp:all_movies' %}">All movies</a>
+        </li>
+
+        <li class="nav-item dropdown {% if 'movieapp' in request.path %} active {% endif %}">
+
+          <a class="nav-link dropdown-toggle" href="{{ category.get_url }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Browse Categories
+          </a>
+
+          <ul class="dropdown-menu">
+            {% for cat in links %}
+            <li><a class="dropdown-item" href="{{ cat.get_url }}">{{ cat.name }}</a></li>
+            {% endfor %}
+
+          </ul>
+        </li>
+        {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'movieapp:movie' %}">{{ user.username }}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'registerapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'registerapp:sign_in' %}">Signin</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'registerapp:login' %}">Login</a>
+                </li>
+                {% endif %}
+      </ul>
+      <form class="d-flex" role="search" action="{% url 'searchapp:searchresult' %}" method="get">
+                {% csrf_token %}
+        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!--    end of dumy navbar-->
+
+<!--<body id="page6">-->
+<!--&lt;!&ndash; START PAGE SOURCE &ndash;&gt;-->
+<!--<div class="tail-top">-->
+<!--  <div class="tail-bottom">-->
+
+<!--    <div id="main">-->
+
+
+
+
+<!--      <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--          <div class="container-fluid">-->
+<!--            <a class="navbar-brand" href="{% url 'cinemasapp:index.html' %}">Cinema World</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--              <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--              <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link active" aria-current="page" href="{% url 'movieapp:all_movies' %}">All movies</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item dropdown {% if 'movieapp' in request.path %} active {% endif %}">-->
+<!--                  <a class="nav-link dropdown-toggle" href="{{ category.get_url }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                    Browse Categories-->
+<!--                  </a>-->
+<!--                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                    {% for cat in links %}-->
+<!--                    <li><a class="dropdown-item" href="{{ cat.get_url }}">{{ cat.name }}</a></li>-->
+<!--                    {% endfor %}-->
+<!--                  </ul>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--              <form class="d-flex" action="{% url 'searchapp:searchresult' %}" method="get">-->
+<!--                {% csrf_token %}-->
+<!--                <input class="form-control me-2" type="search" name="q" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>-->
+<!--              </form>-->
+<!--              <ul class="navbar-nav ms-auto">-->
+<!--                {% if user.is_authenticated %}-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'movieapp:movie' %}">{{ user.username }}</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'registerapp:logout' %}">Logout</a>-->
+<!--                </li>-->
+<!--                {% else %}-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'registerapp:sign_in' %}">Signin</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'registerapp:login' %}">Login</a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </nav>-->
+        <!-- End Navbar -->
+<!--      <div id="header">-->
+<!--        <div class="row-1">-->
+<!--          <div class="fleft"><a href="#">Cinema <span>World</span></a></div>-->
+<!--          <ul>-->
+<!--           {% if user.is_authenticated %}-->
+<!--            <li><a href="{% url 'movieapp:movie' %} ">{{user.username}}</a></li>-->
+<!--            <li style="color:white;"><a href="{% url 'registerapp:logout' %}">Logout</a></li>-->
+<!--             {% else %}-->
+<!--            <li><a href="{% url 'registerapp:sign_in' %}">Signin</a></li>-->
+<!--            <li><a href="{% url 'registerapp:login' %}">Login</a></li>-->
+<!--            {% endif %}-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <div class="row-2">-->
+<!--          <ul>-->
+<!--            <li><a href="{% url 'cinemasapp:index.html' %}">Home</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+        <!-- Navbar -->
+<!--        <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--          <div class="container-fluid">-->
+<!--            <a class="navbar-brand" href="{% url 'cinemasapp:index.html' %}">Cinema World</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--              <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--              <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link active" aria-current="page" href="{% url 'movieapp:all_movies' %}">All movies</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item dropdown {% if 'movieapp' in request.path %} active {% endif %}">-->
+<!--                  <a class="nav-link dropdown-toggle" href="{{ category.get_url }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                    Browse Categories-->
+<!--                  </a>-->
+<!--                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                    {% for cat in links %}-->
+<!--                    <li><a class="dropdown-item" href="{{ cat.get_url }}">{{ cat.name }}</a></li>-->
+<!--                    {% endfor %}-->
+<!--                  </ul>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--              <form class="d-flex" action="{% url 'searchapp:searchresult' %}" method="get">-->
+<!--                {% csrf_token %}-->
+<!--                <input class="form-control me-2" type="search" name="q" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>-->
+<!--              </form>-->
+<!--              <ul class="navbar-nav ms-auto">-->
+<!--                {% if user.is_authenticated %}-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'movieapp:movie' %}">{{ user.username }}</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'registerapp:logout' %}">Logout</a>-->
+<!--                </li>-->
+<!--                {% else %}-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'registerapp:sign_in' %}">Signin</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="{% url 'registerapp:login' %}">Login</a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </nav>-->
+<!--        &lt;!&ndash; End Navbar &ndash;&gt;-->
+<!--      </div>-->
+      <div id="content">
+        <div class="line-hor"></div>
+        <div class="box">
+          <div class="border-right">
+            <div class="border-left">
+              <div class="inner">
+                <h3>Welcome to <b>Cinema</b> <span>World</span></h3>
+                                <p>Felitsed vel inte vivamus ant sed sapientesque ero id auctor tincidunt. Enimin ulla mi et nibh turien augue habitudin platea sed orci. Intedonec quis sed condis donec urna lacilis leo quismodo wisi quis.</p>
+                                <div class="img-box1"><img src="{% static 'images/1page-img1.jpg' %}" alt="" />Fauctororci cursuspendrerisque ipsum elit congue nibh proin nulla eu urna et. Tordolorem metus fringilla sem facinia sapien in in malesuada vitae quismodo. Ipsumut tellentegest nunc pede id sem gravida natis justo maecenas eu. </div>
+                                <p>Doneccursus et amet a mattitor condisse laoreet accum wisis sapibulum orci. Cursuscondimentum dolorem pulvinare lacus amet commod tincidunt tellus quisque donec natibus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="left">
+          <div class="right">
+            <div class="footerlink">
+              <p class="lf">Copyright &copy; 2010 <a href="#">SiteName</a> - All Rights Reserved</p>
+              <p class="rf">Design by <a href="http://www.templatemonster.com/">TemplateMonster</a></p>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+<!-- END PAGE SOURCE -->
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+
+<body style="margin: 0;padding: 0;height: 100vh; %}'); background-size: cover;
+             background-position: center center;align-items: center;
+            justify-content: center;">
+<p style="text-align:center;">
+</p>
+<h3>User <span>Login</span></h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <label> <b>UserId  </b></label>
+    <input type="text" name="userid" placeholder="enter user id" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 20%;"><br>
+    <label><b>Password</b></label>
+    <input type="password" name="password" placeholder="enter your password" style="padding: 8px; margin-bottom: 16px; box-sizing: border-box; width: 20%;"><br>
+    <input type="submit" style="text-align:center">
+
+
+</form>
+{% endblock %}
+</body>
